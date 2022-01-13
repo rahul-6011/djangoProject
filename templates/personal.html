@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Profile {% endblock title %}
+
+{% block extra_head %}
+
+
+    <style>
+        .container{
+            width: initial;
+            font-size: 14px;
+        }
+
+        .container .table thead tr th a{
+            color: #302f2f;
+        }
+    </style>
+{% endblock extra_head %}
+
+{% block body %}
+
+    <div class="products">        
+        <h3>Personal Information</h3>
+    </div>
+
+    <div class="container">
+
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>Account Type</th>
+                    <th>{{user.last_name}}</th>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>{{user.first_name}}</th>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <th>{{user.username}}</th>
+                </tr>
+                <tr>
+                    <th><a href="password">Change Password?</a></th>
+                </tr>
+                {% if user.last_name == 'customer' %}
+                    <tr>
+                        <th><a href="old_orders">View Previous Orders</a></th>
+                    </tr>
+                {% elif user.last_name == 'merchant' %}
+                    <tr>
+                        <th><a href="my_books">View My Books.....</a></th>
+                    </tr>
+                    <tr>
+                        <th><a href="prev_orders">View Previous Orders</a></th>
+                    </tr>
+                {% endif %}
+            </thead>
+        </table>
+
+    </div>
+
+{% endblock body %}

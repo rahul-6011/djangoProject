@@ -1,0 +1,36 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="{% static 'css/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.register.css' %}">
+    <title></title>
+  </head>
+  <body  style=" background-image: url('{% static 'bg.jpg' %}')  ">
+    <div id="main" class="shell">
+      <form class="box" method="post">
+        {% csrf_token %}
+        <h1>Register</h1>
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="email" placeholder="Email">
+        <input type="password" name="password1" placeholder="Password">
+        <input type="password" name="password2" placeholder="Confirm Password">
+        <label for="acc_type">Account Type : : </label>
+        <select name="acc_type" id="acc_type">
+          <option value="customer">Customer</option>
+          <option value="merchant">Merchant</option>
+          <option value="deliveryagent">Delivery Agent</option>
+        </select>
+        <input type="submit" name="" value="Register">
+        <p>Existing user? <a href=" {% url 'index' %}">Login</a></p>
+        <span> 
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+         </span> 
+      </form>
+    </div>  
+  </body>
+</html>

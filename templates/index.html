@@ -1,0 +1,32 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Online Book Store</title>
+    <link rel="shortcut icon" href="{% static 'css/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.index.css' %}">
+  </head>
+  <body  style=" background-image: url('{% static 'bg.jpg' %}')  ">
+    <form class="box" method="post">
+      <h1>Login</h1>
+      {% csrf_token %}
+      <input type="text" name="email" placeholder="Email">
+      <input type="password" name="password" placeholder="Password">
+      <label for="acc_type">Account Type : : </label>
+        <select name="acc_type" id="acc_type">
+          <option value="customer">Customer</option>
+          <option value="merchant">Merchant</option>
+          <option value="deliveryagent">Delivery Agent</option>
+        </select>
+      <input type="submit" name="" value="Login">
+      <p>Don't have an account? <a href=" register">Register</a></p>
+      <span> 
+        {% for message in messages %}
+          {{ message }}
+        {% endfor %}
+       </span> 
+    </form>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load rtn_templates_tags %}
+
+{% block title %} Online Book Store {% endblock title %}
+
+
+{% block content %}
+        <li>
+            <a href="retrn_reqd"> Return Requests ({{request.user|rtn_item_count}}) </a>
+        </li>	
+{% endblock content %}
+
+
+{% block body %}
+
+<h3>Requests</h3>
+
+{% for message in messages %}
+  <div class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+{% endfor %}
+
+
+{% if order_items %}
+
+<div class="row" style="height: 70px;">
+    <div class="col-2 text-md-center">
+        <h4><strong>Customer name </strong></h4>
+    </div>
+    <div class="col-8 text-center row">
+        <div class="col-8  text-md-center">
+            <h4><strong>Books</strong></h4>
+        </div>
+        <div class="col-2 text-md-center">
+            <h4><strong>Cost</strong></h4>
+        </div>
+    </div>
+</div>
+
+
+
+    {% for it in order_items %}
+
+    {% if it.dagent == request.user or it.dagent == None %}
+
+        <div class="row" style="min-height: 80px;">
+            <div class="col-2 text-md-center align-middle">
+                <p style="font-size: 16px;"> <b>{{it.user.first_name}}</b><p>
+            </div>
+            <div class="col-10 text-md-center row">
+                <div class="col-9 text-md-center row">
+                    <div class="col-9 text-md-center">
+                        <p style="font-size: 16px;">{{it.quantity}} x <b>{{it.item.name}}</b> &nbsp;<small>by {{it.item.author}}</small></p>
+                    </div>
+                    <div class="col-3 text-md-center">
+                        <p style="font-size: 16px;">Rs. {{it.get_total_item_price}}</p>
+                    </div>
+                </div>
+                {% if it.dely == False %}
+                  <div class="col-3 align-middle" >
+                      <a href="{% url 'accpetd' it.id %}" class="btn btn-success">Accept</a>
+                  </div>
+                {% else %}
+                  <div class="col-3 align-middle" >
+                    <a href="{% url 'delivd' it.id %}" class="btn btn-success">Delivered</a>
+                  </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+    
+
+        
+    {% else %}
+        <h4>No Orders</h3>
+    {% endif %}
+
+<hr width="60vw">
+<!-- END PRODUCT -->
+</div>
+{% endblock body %}

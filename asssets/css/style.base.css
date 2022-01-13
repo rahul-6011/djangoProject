@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+body {
+    font-size: 12px;
+    line-height: 18px;
+    font-family: arial, sans-serif;
+    color: #383838;
+}
+
+a {
+  color: #0252aa;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h3 {
+  font-family: 'Georgia',Arial, serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 24px;
+  color: #0182b5;
+}
+
+
+.cl {
+  display: block;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -4000px;
+  clear: both;
+}
+
+.shell {
+  width: 1080px;
+  margin: 0 auto;
+  background: white;
+  padding: 0 57px 0 57px;
+  position: relative;
+}
+
+#header {
+  padding-top: 30px;
+}
+
+#logo
+ {
+   width: 238px;
+   height: 41px;
+   float: left;
+   margin-left: -4px;
+   position: relative;
+ }
+
+#logo h1 a {
+  display: block;
+   height: 41px;
+   background: url(images/logo.png);
+   text-indent: -4000px;
+   font-size: 0;
+   line-height: 0;
+ }
+
+#login-details {
+  position: absolute;
+  right: 60px;
+  top: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #707070;
+}
+
+#login-details #user {
+  color: #0182b5;
+  text-decoration: underline;
+  font-weight:bold;
+}
+
+#login-details #user:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+#login-details p {
+  float: left;
+}
+
+#login-details .cart {
+  float: left;
+  margin: 0 6px 0 12px;
+}
+
+#login-details .cart img {
+   display: block;
+ }
+
+#navigation {
+  float: right;
+  font-family: 'Georgia', Arial, serif;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 24px 4px 23px 0;
+}
+
+
+#navigation ul li {
+  list-style: none;
+  padding-left: 33px;
+  float: left;
+}
+
+#navigation ul li a {
+  color: #383838;
+}
+
+#navigation ul li a.active {
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: default;
+}
+
+
+#main {
+  padding-top: 51px;
+  padding-bottom: 41px;
+  z-index: 1;
+}
+
+
+#content {
+  display: inline;
+}
+
+#content h3 {
+  padding: 0 0 7px 3px;
+  border-bottom: solid 4px #eaeaea;
+  margin-bottom: 12px;
+}
+#navigation ul li .search-field {
+  border: none;
+  border-radius: 25px;
+  height: 22px;
+  background-color: rgb(231, 221, 221);
+  text-align: center;
+}
+
+.book{
+    width: 150px;
+}
+
+.author {
+  width: 125px;
+}
+
+.search-btn {
+  padding: 5px 10px;
+  margin-left: 2px;
+  font-size: 12px;
+  border: none;
+  height: 22px;
+}
+
+.search-btn:hover{
+  cursor: pointer;
+}

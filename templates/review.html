@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_templates_tags %}
+
+{% block title %} Online Book Store {% endblock title %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{% static 'css/style.home.css' %}">
+
+	
+	<style>
+		.info:hover{
+			cursor: default;
+		}
+
+        .my-col {
+            min-height: 200px;
+        }
+
+        .my-row {
+            min-height: 50px;
+            font-size: 16px;
+            margin: 10px;
+        }
+
+        .my-row1 {
+            min-height: 50px;
+            font-size: 24px;
+            margin: 10px;
+        }
+
+        .inreview {
+            width: 80%;
+            height: 50px;
+            text-align: center;
+        }
+
+		</style>
+{% endblock extra_head %}
+
+
+{% block body %}
+
+		<!-- Products -->
+			<div class="products">
+				<h3> {{book.name}} - Reviews </h3>
+
+            <div class="container my-container ">
+
+                <div class="row justify-content-center" >
+                    
+                    <div class="col-3">
+                        <ul>
+                            <li>
+                                <br>
+                                <br>
+                                <br>
+                                <a class="info">
+                                    <span class="holder">
+                                        <img src="{{book.img.url}}"  />
+                                        <span class="book-name">{{book.name}}</span>
+                                        <span class="author">by {{book.author}}</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                        
+
+                    <div class="col-7 my-col">
+
+                        {% if all_reviews %}
+                        
+                            <div class="row justify-content-center my-row1" >
+                                <div class="col-3">Name</div>
+                                <div class="col-8">Review</div>
+                            </div>
+                        {% endif %}
+
+                        {% for rw in all_reviews %}
+                        <div class="row justify-content-center my-row" >
+                            <div class="col-3">{{rw.customer.first_name}}</div>
+                            <div class="col-8">{{rw.descrp}}</div>
+                        </div>
+                        {% endfor %}
+
+                       
+
+                    </div>
+
+                    {% if user.is_authenticated %}
+                    <div class="row justify-content-center my-row" >
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            <textarea type="text" class="search-field inreview input1" name="drop_review" placeholder="Add Review "></textarea>
+                            
+                        
+                            <button class="search-btn">
+                                <a href="#"><i class="fa fa-plus"></i></a>
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+                    
+                </div>
+            </div>
+
+{% endblock %}

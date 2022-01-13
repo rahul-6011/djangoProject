@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Requests {% endblock title %}
+
+
+{% block body %}
+
+    <h3>Order Requests</h3>
+
+<div class="container">
+
+    {% for message in messages %}
+        <div class="alert alert-primary" role="alert" style="width: 48vw;">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
+    {% if order_items %}
+
+    <div class="row" style="height: 70px;">
+        <div class="col-2 text-md-center">
+            <h4><strong>Order Item id </strong></h4>
+        </div>
+        <div class="col-6 text-center row">
+            <div class="col-6 text-md-center">
+                <h4><strong>Book</strong></h4>
+            </div>
+            <div class="col-2 text-md-center">
+                <h4><strong>Cost</strong></h4>
+            </div>
+        </div>
+    </div>
+
+
+
+        {% for it in order_items %}
+
+            <div class="row" style="min-height: 80px;">
+                <div class="col-2 text-md-center align-middle">
+                    <p style="font-size: 16px;"> <b>{{it.id}}</b> <p>
+                </div>
+                <div class="col-6 text-md-center row">
+                    <div class="col-9 text-md-center row">
+                        <div class="col-9 text-md-center">
+                            <p style="font-size: 16px;">{{it.quantity}} x <b>{{it.item.name}}</b> &nbsp;<small>by {{it.item.author}}</small></p>
+                        </div>
+                        <div class="col-3 text-md-center">
+                            <p style="font-size: 16px;">Rs. {{it.get_total_item_price}}</p>
+                        </div>
+                    </div>
+                    <div class="col-3 align-middle" >
+                        <a href="{% url 'accpetm' it.id %}" class="btn btn-success">Accept</a>
+                    </div>
+                    <!-- <div class="row">
+                        <h4>Total Sum : Rs. {{it.get_total_price}}</h4>
+                    </div> -->
+                </div>
+            </div>
+
+            {% endfor %}
+        
+
+            
+        {% else %}
+            <h4>No Orders</h3>
+        {% endif %}
+
+    <hr width="60vw">
+    <!-- END PRODUCT -->
+</div>
+
+
+{% endblock %}

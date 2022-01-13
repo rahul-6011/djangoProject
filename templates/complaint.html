@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Complaint {% endblock title %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{% static 'css/style.complaint.css' %}">
+{% endblock extra_head %}
+
+
+{% block body %}
+
+	{% for message in messages %}
+	<div class="alert alert-primary" role="alert">
+		{{ message }}
+	</div>
+	{% endfor %}
+
+	<div class="contact1">
+		<div class="container-contact1">
+
+			
+			<div class="contact1-pic js-tilt" data-tilt>
+				<img src="{% static 'img-01.png' %}" alt="IMG">
+			</div>
+
+			<form  method = "POST" class="contact1-form validate-form">
+                {% csrf_token %}
+				<span class="contact1-form-title">
+					Complaint
+				</span>
+
+				<div class="wrap-input1 validate-input">
+					<input class="input1" type="text" name="subject" placeholder="Subject">
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div class="wrap-input1 validate-input">
+					<textarea class="input1" name="complaint" placeholder="Complaint"></textarea>
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div class="container-contact1-form-btn">
+					<button class="contact1-form-btn">
+						Send
+						<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock body %}

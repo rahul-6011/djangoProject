@@ -1,0 +1,103 @@
+
+.products ul {
+  list-style: none;
+  position: relative;
+  width: 860px;
+  margin: auto;
+}
+
+.products ul li {
+  float: left;
+  display: inline;
+  width: 200px;
+  height: 343px;
+  margin: 0 15px 14px 0;
+}
+
+.products ul li a.info {
+  display: block;
+  padding: 7px;
+  width: 136px;
+  height: 329px;
+}
+
+.products ul li a.info:hover {
+  background: url(images/product-hover.png) no-repeat 0 0;
+  text-decoration: none;
+}
+
+.products ul li a.info .holder {
+  padding: 14px 9px;
+  border: solid 1px #dcdcdc;
+  display: block;
+}
+
+.products .product {
+  width: 134px;
+  position: relative;
+}
+
+.products img {
+  padding: 0 7px 4px;
+  width: 102px;
+  height: 160px;
+}
+
+.product .buy-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 1px;
+  background: url(images/buy-btn.png) repeat-x 0 0;
+  width: 126px;
+  height: 31px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 31px;
+  font-weight: bold;
+  z-index: 10;
+  padding-left: 10px;
+  white-space: nowrap;
+ }
+
+
+.product .buy-btn:hover {
+  text-decoration: none;
+  display: inline;
+}
+
+.product .buy-btn .price {
+  padding: 0 7px;
+  background: url(images/price.png) repeat-x 0 0;
+  font-size: 22px;
+  line-height: 29px;
+  position: absolute;
+  height: 31px;
+}
+
+.product .buy-btn .price .low {
+  font-size: 14px;
+  vertical-align: baseline;
+}
+
+.product .buy-btn .price .high {
+  font-size: 11px;
+  line-height: 14px;
+  vertical-align: super;
+}
+
+.product .book-name {
+  font-size: 12px;
+  line-height: 20px;
+  color: #0182b5;
+  font-family: 'Georgia', Arial, serif;
+  display: block;
+}
+
+.product .author {
+  font-size: 11px;
+  line-height: 14px;
+  color: #3d3d3d;
+  font-family: 'Georgia', Arial, serif;
+  padding: 0 0 9px 1px;
+  display: block;
+}

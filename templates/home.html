@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_templates_tags %}
+
+{% block title %} Online Book Store {% endblock title %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{% static 'css/style.home.css' %}">
+
+	
+	<style>
+		.info:hover{
+			cursor: default;
+		}
+
+		.pagination {
+		  display: inline-block;
+		  position: absolute;
+		  bottom: 10px;
+		  left: 18vw;
+		}
+
+		.pagination a {
+		  color: black;
+		  float: left;
+		  padding: 8px 16px;
+		  text-decoration: none;
+		  border-radius: 5px;
+		}
+
+		.pagination a.active {
+		  background-color: #8a8888;
+		  color: white;
+		}
+
+		.pagination a:hover:not(.active) {
+			background-color: #ddd;
+		}
+
+		.product .wishlist {
+			display: block;
+			position: absolute;
+			bottom: 38px;
+			left: 1px;
+			width: 126px;
+			height: 31px;
+			color: #fff;
+			font-size: 12px;
+			line-height: 31px;
+			font-weight: bold;
+			padding-left: 10px;
+			white-space: nowrap;
+		}
+
+		.product .reviews {
+			display: block;
+			position: absolute;
+			bottom: 54px;
+			left: 1px;
+			width: 126px;
+			height: 31px;
+			color: #fff;
+			font-size: 12px;
+			line-height: 31px;
+			font-weight: bold;
+			padding-left: 10px;
+			white-space: nowrap;
+		}
+
+		.modal-backdrop {
+			height: fit-content;
+			width: fit-content;
+		}
+
+		</style>
+{% endblock extra_head %}
+
+{% block content %}
+			<li>
+				<form>
+					<input type="text" class="search-field book" placeholder="Search by Book Name " name="search_book" value="{{ request.GET.search_book }}">
+					<input type="text" class="search-field author" placeholder="Search by Author" name="search_author" value="{{ request.GET.search_author }}">
+					<button class="search-btn">
+						<a href="#"><i class="fa fa-search"></i></a>
+					</button>
+				</form>
+			</li>
+{% endblock content %}
+
+
+{% block body %}
+
+		<!-- Products -->
+			<div class="products">
+				{% if request.GET.search_book or request.GET.search_author %}
+					<h3>Search Results</h3>
+				{% else %}
+					<h3>Books</h3>
+				{% endif %}
+
+				<span>
+					{% if user.is_authenticated %}
+						{% for message in messages %}
+							<div class="alert alert-primary" role="alert">
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% else %}
+						<h3 style="padding-left: 20vw;">Login to Buy Books</h3>
+					{% endif %}
+
+				</span>
+
+				<ul>
+
+				{% for bk in page_obj %}
+
+					<li>
+						<div class="product">
+							<a class="info">
+								<span class="holder">
+									<img src="{{bk.img.url}}"  />
+									<span class="book-name">{{bk.name}}</span>
+									<span class="author">by {{bk.author}}</span>
+								</span>
+							</a>
+
+							<div  class="reviews">
+								<a href ="{% url 'review' bk.id %}"> Show reviews </a>
+							</div>
+
+							
+							{% if user.is_authenticated %}
+								<div  class="wishlist">
+									<a href="{% url 'add_to_wishlist' bk.id %}"> Add to Wishlist </a>
+								</div>
+								<a href="{% url 'add_to_cart' bk.id %}" class="buy-btn">Add to Cart <span class="price"><span class="low">Rs</span>{{bk.cost}}</span></a>
+							{% endif %}
+						</div>
+					</li>
+
+				{% endfor %}
+
+				</ul>
+			<!-- End Products -->
+
+
+			{% if page_obj %}
+
+				<div class="pagination">
+					{% if page_obj.has_previous %}
+						<a href="?page={{page_obj.previous_page_number}}">&laquo;</a>
+						<a href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
+					{% endif %}
+					<a class="active" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+					{% if page_obj.has_next %}
+						<a href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a>
+						<a href="?page={{page_obj.next_page_number}}">&raquo;</a>
+					{% endif %}
+				</div>
+
+			{% endif %}
+
+{% endblock %}

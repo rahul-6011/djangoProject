@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Wishlist {% endblock title %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{% static 'css/style.home.css' %}">
+
+	<style>
+		.info:hover{
+			cursor: default;
+		}
+
+		.pagination {
+		  display: inline-block;
+		  position: absolute;
+		  bottom: 10px;
+		  left: 18vw;
+		}
+
+		.pagination a {
+		  color: black;
+		  float: left;
+		  padding: 8px 16px;
+		  text-decoration: none;
+		  border-radius: 5px;
+		}
+
+		.pagination a.active {
+		  background-color: #8a8888;
+		  color: white;
+		}
+
+		.pagination a:hover:not(.active) {
+			background-color: #ddd;
+		}
+
+		.product .wishlist {
+			display: block;
+			position: absolute;
+			bottom: 38px;
+			left: 1px;
+			width: 126px;
+			height: 31px;
+			color: #fff;
+			font-size: 12px;
+			line-height: 31px;
+			font-weight: bold;
+			padding-left: 10px;
+			white-space: nowrap;
+		}
+
+		</style>
+{% endblock extra_head %}
+
+
+{% block body %}
+
+		<!-- Products -->
+			<div class="products">
+				
+				<h3>WishList</h3>
+
+				<span>
+                    {% for message in messages %}
+                        <div class="alert alert-primary" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+				</span>
+
+			{% if page_obj %}
+
+				<ul>
+
+				{% for wish in page_obj %}
+
+					<li>
+						<div class="product">
+							<a class="info">
+								<span class="holder">
+									<img src="{{wish.book.img.url}}"  />
+									<span class="book-name">{{wish.book.name}}</span>
+									<span class="author">by {{wish.book.author}}</span>
+								</span>
+							</a>
+
+							{% if user.is_authenticated %}
+								<div  class="wishlist">
+									<a href="{% url 'remove_from_wishlist' wish.id %}"> Remove from Wishlist </a>
+								</div>
+
+								<a href="{% url 'add_to_wishlist_cart' wish.book.id %}" class="buy-btn">Add to Cart <span class="price"><span class="low">Rs</span>{{wish.book.cost}}</span></a>
+							{% endif %}
+						</div>
+					</li>
+
+				{% endfor %}
+
+				</ul>
+			<!-- End Products -->
+
+			{% else %}
+				<h4 style="text-align:center;margin-top:10vh;" > Wishlist is empty</h4>
+			{% endif %}
+
+
+            {% if page_obj %}
+
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{page_obj.previous_page_number}}">&laquo;</a>
+                        <a href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
+                    {% endif %}
+                    <a class="active" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+                    {% if page_obj.has_next %}
+                        <a href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a>
+                        <a href="?page={{page_obj.next_page_number}}">&raquo;</a>
+                    {% endif %}
+                </div>
+
+            {% endif %}
+
+
+
+{% endblock %}
